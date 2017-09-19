@@ -1,0 +1,13 @@
+{
+  "short_name": "Bolt",
+  "name": "A graphic novel reader focused on speed.",
+  "display": "standalone",
+  "theme_color": "#29ABA4",
+  "background_color": "#29ABA4",
+  "icons": [{
+    "src": "images/bolt.png",
+    "type": "image/png",
+    "sizes": "144x144"
+  }],
+  "start_url": "index.html?launcher=true"
+}
