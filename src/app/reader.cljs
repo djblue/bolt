@@ -29,7 +29,9 @@
       :reagent-render
       (fn [{:keys [file nav-open? on-prev on-next on-set-page]}]
         (let [{:keys [id page-stack pages]} file
-              page-stack (if (empty? page-stack) '(0) page-stack)]
+              page-stack (if (empty? page-stack) '(0) page-stack)
+              top (first page-stack)
+              has-more? (< top (dec (count pages)))]
           [:div {:class (:reader style)}
            (if nav-open?
              [:div {:class (:nav-container style)}
@@ -39,8 +41,12 @@
                            :on-select on-set-page}]]])
            [:div {:ref (fn [com] (reset! !ref com))
                   :class (:page-container style)}
-            [page {:src (str "/api/books/" id "/pages/" (first page-stack) "?width=960")
+            [page {:src (str "/api/books/" id "/pages/" top "?width=960")
                    :on-prev on-prev
                    :on-next #(do
                                (set! (.-scrollTop @!ref) 0)
-                               (on-next))}]]]))})))
+                               (on-next))}]
+            (if has-more? ;; load next image to cache image
+              [:img
+               {:style {:display :none}
+                :src (str "/api/books/" id "/pages/" (inc top) "?width=960")}])]]))})))
