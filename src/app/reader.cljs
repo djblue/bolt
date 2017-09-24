@@ -41,7 +41,7 @@
                            :on-select on-set-page}]]])
            [:div {:ref (fn [com] (reset! !ref com))
                   :class (:page-container style)}
-            [page {:src (str "/api/books/" id "/pages/" top "?width=960")
+            [page {:src (str "api/books/" id "/pages/" top "?width=960")
                    :on-prev on-prev
                    :on-next #(do
                                (set! (.-scrollTop @!ref) 0)
@@ -49,4 +49,4 @@
             (if has-more? ;; load next image to cache image
               [:img
                {:style {:display :none}
-                :src (str "/api/books/" id "/pages/" (inc top) "?width=960")}])]]))})))
+                :src (str "api/books/" id "/pages/" (inc top) "?width=960")}])]]))})))

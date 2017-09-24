@@ -60,7 +60,7 @@
                               (go
                                 (swap! state assoc :selected id)
                                 (swap! state assoc-in [:files id :pages]
-                                       (:body (<! (http/get (str "/api/books/" id "/pages")))))))}])]))
+                                       (:body (<! (http/get (str "api/books/" id "/pages")))))))}])]))
 
 (defn ^:export render []
   (r/render [app]
@@ -100,7 +100,7 @@
 
 (defn do-init []
   (go
-    (let [files (normalize (:body (<! (http/get "/api/books"))))]
+    (let [files (normalize (:body (<! (http/get "api/books"))))]
       (swap! state update :files #(merge-with into % files))))
   (go-loop []
     (on-keyup (.-key (<! keyup)))
