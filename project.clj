@@ -15,7 +15,8 @@
                                                               commons-codec
                                                               commons-fileupload]]
                  [com.github.beothorn/junrar "0.6"]]
-  :plugins [[lein-cljsbuild "1.1.7"]]
+  :plugins [[lein-cljsbuild "1.1.7"]
+            [lein-project-version "0.1.0"]]
   :profiles {:cljs {:dependencies
                     [[org.clojure/clojurescript "1.9.521"]
                      [cljs-http "0.1.43"]
