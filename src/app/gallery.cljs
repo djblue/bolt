@@ -30,13 +30,15 @@
 (defn gallery [{:keys [files on-select]}]
   (let [display (set (map (fn [[id _]] {:id id :n 0 :width 200}) files))]
     [:div {:class (:gallery style)}
-     (map-indexed
-      (fn [idx [id itm]]
-        [:div
-         {:key idx
-          :class (:book style)
-          :on-click (fn [_] (on-select itm))}
-         [:div {:class (:cover style)}
-          [img {:src (str "/api/books/" id "/pages/" 0 "?width=200")}]]
-         [:div {:class (:title style)} (:title itm)]])
-      files)]))
+     (->> files
+          vals
+          (sort-by :title)
+          (map-indexed
+           (fn [idx {:keys [id title] :as itm}]
+             [:div
+              {:key idx
+               :class (:book style)
+               :on-click (fn [_] (on-select itm))}
+              [:div {:class (:cover style)}
+               [img {:src (str "/api/books/" id "/pages/" 0 "?width=200")}]]
+              [:div {:class (:title style)} title]])))]))
