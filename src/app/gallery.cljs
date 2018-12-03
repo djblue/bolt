@@ -40,5 +40,5 @@
                :class (:book style)
                :on-click (fn [_] (on-select itm))}
               [:div {:class (:cover style)}
-               [img {:src (str "/api/books/" id "/pages/" 0 "?width=200")}]]
+               [img {:src (str "api/books/" id "/pages/" 0 "?width=200")}]]
               [:div {:class (:title style)} title]])))]))
