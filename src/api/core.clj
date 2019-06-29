@@ -1,6 +1,7 @@
 (ns api.core
   (:require [api.books :as books]
             [api.config :as config]
+            [clojure.java.io :as io]
             [compojure.core :refer :all]
             [compojure.route :as route]
             [org.httpkit.server :refer [run-server]]
@@ -14,6 +15,7 @@
   (:gen-class))
 
 (defroutes handler
+  (GET "/" [] (io/resource "public/index.html"))
   (GET "/api/books" {:keys [config]}
     {:body (books/find-files (:bolt/root-dir config))})
   (GET "/api/books/:id/pages" [id]
